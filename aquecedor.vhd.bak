@@ -1,0 +1,12 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity aquecedor is
+ 	port 	(A, B, C, M: in std_logic;
+		 Y: out std_logic);
+end aquecedor;
+
+architecture arch of aquecedor is
+begin
+	Y<= '1' WHEN M = '0' and (A = '1' or B = '1' or C = '1') else 0;
+end;

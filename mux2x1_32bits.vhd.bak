@@ -1,0 +1,16 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity multi32 is
+
+	port (A, B: in std_logic_vector(31 downto 0);
+	S: in std_logic;
+	SAIDA: out std_logic_vector(31 downto 0));
+
+
+end multi;
+
+architecture mux of multi32 is
+begin
+	SAIDA <= A when S = '0' else B;
+end mux;

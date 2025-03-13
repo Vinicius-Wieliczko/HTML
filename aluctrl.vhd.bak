@@ -1,0 +1,18 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity aluctrl is
+	port(	aluop: in std_logic_vector (1 downto 0);
+		instr : in std_logic_vector (5 downto 0);
+		aluctrl: out std_logic_vector (2 downto 0));
+end aluctrl;
+
+architecture behavioral of aluctrl is
+
+begin 
+	aluctrl(2) <= aluop(0) or (aluop(1) and instr(1));
+	aluctrl(1) <= (not aluop(1)) or (not instr(2));
+	aluctrl(0) <= (aluop(1) and instr(0)) or (aluop(1) and instr(3));
+
+
+end behavioral;

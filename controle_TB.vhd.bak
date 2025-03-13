@@ -1,0 +1,40 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity controle_TB is
+end controle_TB;
+
+architecture arch of controle_TB is
+	signal OP: std_logic_vector (5 downto 0);
+	signal ALUOp: std_logic_vector (1 downto 0);
+	signal RegDst, ALUSrc, MemToReg, RegWrite, MemRead, MemWrite, Branch, BranchNE: std_logic;
+begin
+
+utt: entity work.controle
+	port map(OP, ALUOp, RegDst, ALUSrc, MemToReg, RegWrite, MemRead, MemWrite, Branch, BranchNE);
+
+simula: process
+begin
+	OP <= "000000";
+	wait for 100 ps;
+
+	OP <= "100011";
+	wait for 100 ps;
+
+	OP <= "101011";
+	wait for 100 ps;
+
+	OP <= "000100";
+	wait for 100 ps;
+	
+	OP <= "000101";
+	wait for 100 ps;
+
+	OP <= "000010";
+	wait for 100 ps;
+
+	OP <= "001000";
+	wait for 100 ps;
+
+end process simula;
+end;

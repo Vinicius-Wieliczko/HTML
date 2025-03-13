@@ -1,0 +1,39 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity alu_tb is
+end alu_tb;
+
+
+architecture behavioral of alu_tb is
+
+	signal data1: std_logic_vector (31 downto 0);
+	signal data2: std_logic_vector (31 downto 0);
+	signal zero: std_logic;
+	signal alu_result: std_logic_vector(31 downto 0);
+	signal aluctr: std_logic_vector (2 downto 0);
+
+	signal aluop: std_logic_vector (1 downto 0);
+	signal instr: std_logic_vector (5 downto 0);
+
+	begin
+		alu: entity work.alu port map (data1, data2, aluctr, zero, alu_result);
+		aluctrl: entity work.aluctrl port map (aluop, instr, aluctr);
+
+		testa:process
+		begin
+				
+			data1 <= x"00000001";
+			data2 <= x"00000005";
+			Instr <= "100000";
+			ALUOP <= "10";
+			wait for 100 ps;
+	
+			data1 <= x"00000008";
+			data2 <= x"00000003";
+			Instr <= "100010";
+			ALUOP <= "10";
+			wait for 100 ps;
+	end process;
+end

@@ -1,0 +1,28 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity Maioria_TB is 
+end Maioria_TB;
+
+architecture arch of Maioria_TB is
+signal A, B, C: std_logic;
+signal Y: std_logic;
+begin
+UUT: entity work.Maioria port map (A=>A, B=>B, C=>C, Y=>Y);
+
+test: process
+begin
+A<='0';
+B<='0';
+C<='0';
+wait for 100 ps;
+A<='0';
+B<='1';
+C<='1';
+wait for 100 ps;
+A<='1';
+B<='0';
+C<='0';
+wait for 100 ps;
+end process;
+end;

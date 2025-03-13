@@ -1,0 +1,22 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity multi4x1 is
+
+	port (A, B, C, D, S0, S1: in std_logic;
+	SAIDA: out std_logic);
+
+end multi4x1;
+
+architecture mux of multi4x1 is
+signal t1, t2: std_logic;
+begin
+	UTT1: entity work.multi port map(A, B, S0, t1);
+	UTT1: entity work.multi port map(C, D, S0, t2);
+	UTT1: entity work.multi port map(t1, t2, S1, SAIDA);
+
+	SAIDA <= t1 when S1 = '0' else t2;
+	t1 <= A when S0 = '0' else B;
+	t2 <= C when S0 = '0' else D;
+	
+end mux;

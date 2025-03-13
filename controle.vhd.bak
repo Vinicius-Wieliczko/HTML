@@ -1,0 +1,34 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity controle is
+
+port (	OP: in std_logic_vector (5 downto 0);
+	ALUOp: out std_logic_vector (1 downto 0);
+	RegDst, ALUSrc, MemToReg, RegWrite, MemRead, MemWrite, Branch, BranchNE, Jump: out std_logic);	
+end controle;
+architecture behavioral of controle is 
+	signal R_type, LWD, SWD, BEQ, ADDI, BNE, J: std_logic;
+begin
+	R_type <= '1' when OP = "000000" else '0';
+	LWD <= '1' when OP = "100011" else '0';
+	SWD <= '1' when OP = "101011" else '0';
+	BEQ <= '1' when OP = "000100" else '0';
+	BNE <= '1' when OP = "000101" else '0';
+	J <= '1' when OP = "000010" else '0';
+	ADDI <= '1' when OP = "001000" else '0';
+
+	Branch <= BEQ;
+	MemToReg <= LWD;
+	ALUSrc <= LWD or SWD or ADDI;
+	RegDst <= R_type;
+	MemRead <= LWD;
+	MemWrite <= SWD;
+	RegWrite <= R_type or LWD or ADDI;
+
+	ALUOp(1) <= R_type;
+	ALUOp(0) <= BEQ or BNE;
+	BranchNE <= BNE;
+	Jump <= J
+
+end behavioral;

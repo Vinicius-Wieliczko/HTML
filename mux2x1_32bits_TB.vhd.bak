@@ -1,0 +1,40 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity multi32_TB is
+end multi32_TB;
+
+architecture mux of multi32_TB is
+	signal A, B, SAIDA: std_logic_vector(31 downto 0);
+	signal S: std_logic;
+
+begin 
+
+utt: entity work.multi32
+	port map (A=>A, B=>B, S=>S, SAIDA=>SAIDA);
+
+simula: process
+begin 
+	A<=x"00000000";
+	B<=x"00000000";
+	S<='0';
+	wait for 100 ps;
+
+	A<=x"00000001";
+	B<=x"00000000";
+	S<='0';
+	wait for 100 ps;
+
+	A<=x"00000001";
+	B<=x"00000000";
+	S<='1';
+	wait for 100 ps;
+
+	A<=x"00000000";
+	B<=x"00000001";
+	S<='1';
+	wait for 100 ps;
+end process;
+end;
+
+

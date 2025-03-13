@@ -1,0 +1,12 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity Maioria is
+port 	(A, B, C: in std_logic;
+	Y: out std_logic);
+end maioria;
+
+architecture arch of Maioria is
+begin
+	Y <= (A and B) or (B and C) or (A and C);
+end;
